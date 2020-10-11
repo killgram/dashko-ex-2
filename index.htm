@@ -21,7 +21,7 @@
       </div>
       <!-- get data -->
       <div class="container-fluid">
-            <form class="col-lg-6 col-auto justify-content-center mx-auto" id="get-data">
+            <form class="col-lg-6 col-auto justify-content-center mx-auto" id="get-data" name="getData">
                 <fieldset>
                     <legend>Выберите JSON-объект</legend>
                 <div class="form-group">
@@ -33,8 +33,8 @@
                     <input type="file" class="form-control-file" id="inputFile">
                   </div>
                   <div class="row mx-auto ">
-                    <button type="submit" class="btn btn-primary">Создать форму</button>
-                    <button type="submit" class="btn btn-primary">Очистить форму</button>
+                    <button type="button" class="btn btn-primary" id="createForm">Создать форму</button>
+                    <button type="button" class="btn btn-primary" id="clearForm">Очистить форму</button>
                   </div>
                 </fieldset>
               </form>
