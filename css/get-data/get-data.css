@@ -1,0 +1,26 @@
+#main-title{
+    margin: 30px auto;
+}
+#get-data button{
+    margin-top: 10px;
+    margin-right: 10px;
+}
+#get-data fieldset{
+    padding: 20px 20px;
+    border: 1px solid grey;
+}
+#get-data legend{
+    width: auto;
+    padding: 0 10px;
+}
+@media(max-width:364px){
+    #get-data button{
+        margin: 5px auto;
+    }
+    #get-data legend{
+        font-size: 18px;
+    }
+    #get-data #inputFile{
+        font-size: revert;
+    }
+}
