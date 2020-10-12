@@ -1,8 +1,10 @@
+let body = document.querySelector('body');
+let divForm1 = body.children[1];
 let form1 = document.forms.getData;
 let createbtn = document.getElementById('createForm');
 let inputLink = document.getElementById('inputWay');
 let inputFile = document.getElementById('inputFile');
-// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/interview.js';
+inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/addpost.js';
 
 let inputData;
 // get data
@@ -18,15 +20,26 @@ inputFile.addEventListener('change', function () {
 })
 
 createbtn.onclick = async function (e) {
-    if(inputLink.value==''){
-            createForm(inputData);
-        } else {
+    if (inputLink.value == '') {
+        createForm(inputData);
+    } else {
         let response = await fetch(inputLink.value);
         inputData = await response.json();
         createForm(inputData);
     }
 }
+
+// console.log(inputData);
+
 // create form
 function createForm(inputData) {
-    console.log(inputData);
+    let divForm2 = document.createElement('div');
+    divForm2.setAttribute('class','container-fluid');
+    divForm1.after(divForm2);
+    //render main part
+    let renderForm = document.createElement('form');
+    renderForm.setAttribute('class','col-lg-6 col-auto justify-content-center mx-auto');
+    renderForm.setAttribute('id','renderForm');
+    renderForm.setAttribute('name','renderForm');
+    divForm2.append(renderForm);
 }
