@@ -4,7 +4,7 @@ let form1 = document.forms.getData;
 let createbtn = document.getElementById('createForm');
 let inputLink = document.getElementById('inputWay');
 let inputFile = document.getElementById('inputFile');
-inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/colorsheme.js';
+inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/interview.js';
 
 let inputData;
 // get data
@@ -88,14 +88,50 @@ function renderFields(field) {
             let content = document.createElement(Object.keys(elem[i])[k]);
             if (Object.keys(elem[i])[k] == "label") {
                 content.innerHTML = Object.values(elem[i])[k];
-            } else {
+            }
+            else if (Object.values(elem[i])[k].hasOwnProperty('technologies')) {
+                content = document.createElement('select');
+                for (let key in Object.values(elem[i])[k]) {
+                    content.setAttribute(key, Object.values(elem[i])[k][key]);
+                    if (key == "technologies") {
+                        var technologies = Object.values(elem[i])[k][key];
+                        content.removeAttribute('technologies');
+                    }
+                }
+                for (let val in Object.values(technologies)) {
+                    let option = document.createElement('option');
+                    option.innerHTML = Object.values(technologies)[val];
+                    content.append(option);
+                }
+            }
+            else {
                 for (let key in Object.values(elem[i])[k]) {
                     content.setAttribute(key, Object.values(elem[i])[k][key]);
                     if (key == "colors") {
                         var colorColors = Object.values(elem[i])[k][key];
                     }
+                    if (key == "mask") {
+                        content.setAttribute('data-mask', Object.values(elem[i])[k][key]);
+                        content.setAttribute('type', 'text');
+                        content.onkeydown = function (e) {
+                            let target = e.key;
+                            if (target = Number(target) ||
+                                (e.keyCode == 8) ||
+                                (e.keyCode == 46) ||
+                                (e.keyCode == 9) ||
+                                (e.keyCode == 27) ||
+                                (e.keyCode == 65 && e.ctrlKey === true) ||
+                                (e.keyCode >= 35 && e.keyCode <= 39)) {
+                                return;
+                            } else {
+                                e.preventDefault();
+                            }
+                        }
+                        content.removeAttribute('mask');
+                    }
                 }
             }
+            //
             if (content.type == "file") {
                 content.setAttribute('class', 'form-control-file');
             } else if (content.type == "color") {
@@ -110,10 +146,11 @@ function renderFields(field) {
                     content.append(option);
                 }
             } else if (content.type == "checkbox") {
-                content.setAttribute('class','form-check-input');
-                div.setAttribute('class','form-check');
-            } else if (content.type) {
-                content.setAttribute('class', 'form-control');
+                content.classList.add('form-check-input');
+                div.setAttribute('class', 'form-check');
+            }
+            else if (content.type) {
+                content.classList.add('form-control');
             }
             div.append(content);
         }

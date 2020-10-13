@@ -20,7 +20,7 @@ fieldset{
     #get-data legend{
         font-size: 18px;
     }
-    #get-data #inputFile{
+    .form-control-file{
         font-size: revert;
     }
 }
