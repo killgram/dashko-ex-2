@@ -4,7 +4,12 @@ let form1 = document.forms.getData;
 let createbtn = document.getElementById('createForm');
 let inputLink = document.getElementById('inputWay');
 let inputFile = document.getElementById('inputFile');
+// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/addpost.js';
+// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/colorsheme.js';
 inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/interview.js';
+// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/signin.js';
+// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/signup.js';
+
 
 let inputData;
 // get data
@@ -48,9 +53,9 @@ function createForm() {
 
 //create blocks
 function createBlocks(data) {
-    for (i = 0; i < Object.entries(data).length; i++) {
-        let formBlock = Object.entries(data)[i];
-        renderBlocks(formBlock);
+    for (let key1 in Object.entries(data)) {
+        let formblock = Object.entries(data)[key1];
+        renderBlocks(formblock);
     }
 }
 
@@ -159,7 +164,52 @@ function renderFields(field) {
 
 //render references
 function renderReferences(references) {
-    // console.log(references);
+    let elem = Object.values(references)[1];
+    let div = document.createElement('div');
+    let target = document.getElementById('fieldset');
+    div.setAttribute('class', 'col');
+    target.append(div);
+    for (i = 0; i < elem.length; i++) {
+        let content;
+        let countRef = 0;
+        for (k = 0; k < Object.keys(elem[i]).length; k++) {
+            if (Object.keys(elem[i])[k] == "input") {
+                content = document.createElement(Object.keys(elem[i])[k]);
+                for (let key in Object.values(elem[i])[k]) {
+                    content.setAttribute(key, Object.values(elem[i])[k][key]);
+                    if (content.type == "checkbox") {
+                        content.classList.add('form-check-input');
+                        div.setAttribute('class', 'form-check');
+                    }
+                }
+            } else if (Object.keys(elem[i])[k] == "text without ref") {
+                countRef++;
+                var setLabel = Object.values(elem[i])[k] + " ";
+            } else if (Object.keys(elem[i])[k] == "text") {
+                countRef++;
+                var textLink = document.createElement('label');
+                var link = document.createElement('a');
+                link.innerHTML = Object.values(elem[i])[k];
+            } else if (Object.keys(elem[i])[k] == "ref") {
+                countRef++;
+                link.href = Object.values(elem[i])[k];
+            }
+            if (countRef === 3) {
+                content = textLink;
+                content.innerHTML = setLabel;
+                textLink.append(link);
+            } else if(countRef === 2 && !setLabel){
+                content = textLink;
+                content.append(link);
+                div.classList.add('refLink');
+            }
+            if (!content) {
+                continue;
+            } else {
+                div.append(content);
+            }
+        }
+    }
 }
 
 //render buttons
