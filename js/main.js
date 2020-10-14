@@ -134,12 +134,16 @@ function renderFields(field) {
                         }
                         content.removeAttribute('mask');
                     }
+                    if (Object.values(elem[i])[k][key] == "textarea"){
+                        content = document.createElement('textarea');
+                    }
                 }
             }
             //
             if (content.type == "file") {
                 content.setAttribute('class', 'form-control-file');
-            } else if (content.type == "color") {
+            } 
+            else if (content.type == "color") {
                 div.append(content);
                 content = document.createElement('select');
                 content.setAttribute('class', 'form-control');
@@ -150,7 +154,8 @@ function renderFields(field) {
                     option.style.color = "#ffffff";
                     content.append(option);
                 }
-            } else if (content.type == "checkbox") {
+            } 
+            else if (content.type == "checkbox") {
                 content.classList.add('form-check-input');
                 div.setAttribute('class', 'form-check');
             }
@@ -214,5 +219,5 @@ function renderReferences(references) {
 
 //render buttons
 function renderButtons(buttons) {
-    // console.log(buttons);
+    console.log(buttons);
 }
