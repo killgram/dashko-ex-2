@@ -5,7 +5,7 @@ let createbtn = document.getElementById('createForm');
 let clearbtn = document.getElementById('clearForm');
 let inputLink = document.getElementById('inputWay');
 let inputFile = document.getElementById('inputFile');
-inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/addpost.js';
+// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/addpost.js';
 // inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/colorsheme.js';
 // inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/interview.js';
 // inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/signin.js';
@@ -35,13 +35,20 @@ createbtn.onclick = async function (e) {
     }
 }
 //clear btn
-clearbtn.onclick = function(){
+clearbtn.onclick = function () {
+    clearbtn.setAttribute('disabled', 'true');
+    createbtn.removeAttribute('disabled');
     let render = document.getElementById('render');
     render.remove();
 }
 
 // create form
 function createForm() {
+    if (!inputData) {
+        return;
+    }
+    createbtn.setAttribute('disabled', 'true');
+    clearbtn.removeAttribute('disabled');
     let divForm2 = document.createElement('div');
     divForm2.setAttribute('class', 'container-fluid');
     divForm2.setAttribute('id', 'render');
