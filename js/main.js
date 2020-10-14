@@ -4,9 +4,9 @@ let form1 = document.forms.getData;
 let createbtn = document.getElementById('createForm');
 let inputLink = document.getElementById('inputWay');
 let inputFile = document.getElementById('inputFile');
-// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/addpost.js';
+inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/addpost.js';
 // inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/colorsheme.js';
-inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/interview.js';
+// inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/interview.js';
 // inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/signin.js';
 // inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/signup.js';
 
@@ -134,7 +134,7 @@ function renderFields(field) {
                         }
                         content.removeAttribute('mask');
                     }
-                    if (Object.values(elem[i])[k][key] == "textarea"){
+                    if (Object.values(elem[i])[k][key] == "textarea") {
                         content = document.createElement('textarea');
                     }
                 }
@@ -142,7 +142,7 @@ function renderFields(field) {
             //
             if (content.type == "file") {
                 content.setAttribute('class', 'form-control-file');
-            } 
+            }
             else if (content.type == "color") {
                 div.append(content);
                 content = document.createElement('select');
@@ -154,7 +154,7 @@ function renderFields(field) {
                     option.style.color = "#ffffff";
                     content.append(option);
                 }
-            } 
+            }
             else if (content.type == "checkbox") {
                 content.classList.add('form-check-input');
                 div.setAttribute('class', 'form-check');
@@ -203,7 +203,7 @@ function renderReferences(references) {
                 content = textLink;
                 content.innerHTML = setLabel;
                 textLink.append(link);
-            } else if(countRef === 2 && !setLabel){
+            } else if (countRef === 2 && !setLabel) {
                 content = textLink;
                 content.append(link);
                 div.classList.add('refLink');
@@ -219,5 +219,18 @@ function renderReferences(references) {
 
 //render buttons
 function renderButtons(buttons) {
-    console.log(buttons);
+    let elem = Object.values(buttons)[1];
+    let div = document.createElement('div');
+    let target = document.getElementById('fieldset');
+    div.classList.add('row', 'mx-auto');
+    target.append(div);
+    for (i = 0; i < elem.length; i++) {
+        let content = document.createElement('button');
+        content.setAttribute('type', 'button');
+        content.classList.add('btn', 'btn-primary');
+        for (let key in Object.keys(elem[i])) {
+            content.innerHTML = Object.values(elem[i]);
+        }
+        div.append(content);
+    }
 }
