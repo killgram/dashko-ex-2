@@ -2,6 +2,7 @@ let body = document.querySelector('body');
 let divForm1 = body.children[1];
 let form1 = document.forms.getData;
 let createbtn = document.getElementById('createForm');
+let clearbtn = document.getElementById('clearForm');
 let inputLink = document.getElementById('inputWay');
 let inputFile = document.getElementById('inputFile');
 inputLink.value = 'https://raw.githubusercontent.com/killgram/JSON-format/master/addpost.js';
@@ -23,7 +24,7 @@ inputFile.addEventListener('change', function () {
     };
     fileread.readAsText(file_to_read);
 })
-
+//create btn
 createbtn.onclick = async function (e) {
     if (inputLink.value == '') {
         createForm();
@@ -33,11 +34,17 @@ createbtn.onclick = async function (e) {
         createForm();
     }
 }
+//clear btn
+clearbtn.onclick = function(){
+    let render = document.getElementById('render');
+    render.remove();
+}
 
 // create form
 function createForm() {
     let divForm2 = document.createElement('div');
     divForm2.setAttribute('class', 'container-fluid');
+    divForm2.setAttribute('id', 'render');
     divForm1.after(divForm2);
     //render main part
     let renderForm = document.createElement('form');
